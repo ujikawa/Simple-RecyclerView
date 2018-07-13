@@ -1,29 +1,30 @@
 package com.example.h_ujikawa.simplerecyclerview;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import com.example.h_ujikawa.simplerecyclerview.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerViewAdapter = new RecyclerViewAdapter(getListData());
-        recyclerView.setAdapter(recyclerViewAdapter);
+        binding.recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     private List<String> getListData() {
